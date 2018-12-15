@@ -9,3 +9,7 @@ urlpatterns = [
     path('', views.index, name='index')
 ]
 
+urlpatterns += [
+    path('performers/<int:pk>', views.performer_detail, name='performer-detail')
+]
+
