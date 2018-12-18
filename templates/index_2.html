@@ -1,0 +1,21 @@
+<!-- Based on index_1.html. For loop added in the end of this file.
+The range variable passed from views.py as part of the context. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Because the Night</title>
+</head>
+<body>
+    <h1>Because the Night</h1>
+    <p>This site is named after the beautiful song <em><b>Because the Night</b></em>. <br>
+    In 2018, we celebrate 40 years of its first release.</p>
+
+    <ul>
+        {% for i in range %}
+            <li><p>Number of performers: {{ n_performers }}</p></li>
+        {% endfor%}
+    </ul>
+</body>
+</html>
