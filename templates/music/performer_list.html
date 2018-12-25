@@ -1,0 +1,23 @@
+<!-- Based on index.html, common_content.html and common_sidebar.html. -->
+
+{% extends 'base.html' %}
+
+{% block sidebar %}
+    {%  include 'music/common_sidebar.html'%}
+    <p><a href="{% url 'performer-create' %}">Add performer</a></p>
+{% endblock %}
+
+{% block content %}
+    {% include 'music/common_content.html' %}
+
+    {% if performer_list %}
+        <p>This site has registered the following performers:</p>
+        <ul>
+            {% for performer in performer_list %}
+                <li><a href="{% url 'performer-detail' performer.id %}">{{ performer.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No performers registered.</p>
+    {% endif %}
+{% endblock %}

@@ -3,9 +3,10 @@
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
-from music.models import Performer
+from music.models import Performer, Song
 
 
 # def index(request):
@@ -43,10 +44,52 @@ class PerformerDetailView(DetailView):
 
 class PerformerListView(ListView):
     model = Performer
-    template = 'music/performer_list.html'
+    template_name = 'music/performer_list.html'
     paginate_by = 2
 
     def get_queryset(self):
         return Performer.objects.all()
 
+
+class SongDetailView(DetailView):
+    model = Song
+
+
+class SongListView(ListView):
+    model = Song
+    template_name = 'music/song_list.html'
+    paginate_by = 2
+
+    def get_queryset(self):
+        return Song.objects.all()
+
+
+class PerformerCreate(CreateView):
+    model = Performer
+    fields = '__all__'
+
+
+class PerformerUpdate(UpdateView):
+    model = Performer
+    fields = ['name', 'is_band']
+
+
+class PerformerDelete(DeleteView):
+    model = Performer
+    success_url = reverse_lazy('performer-list')
+
+
+class SongCreate(CreateView):
+    model = Song
+    fields = '__all__'
+
+
+class SongUpdate(UpdateView):
+    model = Song
+    fields = ['title', 'performer', 'time', 'release_date']
+
+
+class SongDelete(DeleteView):
+    model = Song
+    success_url = reverse_lazy('song-list')
 
